@@ -26,7 +26,7 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 1
+ITE = 10
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
@@ -40,7 +40,7 @@ data_set = str(os.getenv('DATA_SET', 'C101_0.5.dat'))
 SEGMENT = 3
 solution_pack_len = int(os.getenv('SOLUTION_PACK_LEN', '0'))
 similarity = float(os.getenv('SIMILARITY', '0.6'))
-TIME_LIMIT = 20000
+
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [score / total_fitness for score in fitness_scores]
