@@ -81,9 +81,6 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     current_sol = init_solution
     
     while T < SEGMENT:
-        end_time = time.time()
-        if end_time - start_time > TIME_LIMIT:
-            break
         tabu_tenure = tabu_tenure1 = tabu_tenure3 = tabu_tenure2 = random.uniform(2*math.log(Data.number_of_cities), Data.number_of_cities)
         Tabu_Structure = [(tabu_tenure +1) * (-1)] * Data.number_of_cities
         Tabu_Structure1 = [(tabu_tenure +1) * (-1)] * Data.number_of_cities
@@ -346,7 +343,6 @@ def Tabu_search_for_CVRP(CC):
     Data1 = []
     list_init = []
     
-    start_time = time.time()
     current_sol5 = Function.initial_solution3()
     list_init.append(current_sol5)
 
