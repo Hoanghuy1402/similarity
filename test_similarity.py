@@ -37,7 +37,7 @@ number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '30'))
 delta = 0.3
 alpha = [0.5, 0.3, 0.1]
 data_set = str(os.getenv('DATA_SET', 'C101_0.5.dat'))
-SEGMENT = 5
+SEGMENT = 3
 solution_pack_len = int(os.getenv('SOLUTION_PACK_LEN', '0'))
 similarity = float(os.getenv('SIMILARITY', '0.6'))
 TIME_LIMIT = 20000
@@ -336,7 +336,6 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
         # print(T, best_sol, "\n", best_fitness)
         # print(used, score, sum(used))
 
-        T += 1
         if best_fitness - prev_f < epsilon:
             T = 0
         else: 
