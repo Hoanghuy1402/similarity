@@ -70,7 +70,7 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     use_optimize_truck_route = False
     
     Data1 = [['act', 'fitness', 'change1', 'change2', 'solution', 'tabu structue', 'tabu structure1']]
-    LOOP = min(int(Data.number_of_cities*math.log10(Data.number_of_cities)), 100)
+    LOOP = int(Data.number_of_cities/math.log10(Data.number_of_cities))
 
     # BREAKLOOP = Data.number_of_cities
 
