@@ -73,7 +73,7 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     LOOP = min(int(Data.number_of_cities*math.log10(Data.number_of_cities)), 100)
 
     # BREAKLOOP = Data.number_of_cities
-    SEGMENT = 100
+    SEGMENT = 10
     END_SEGMENT =  int(Data.number_of_cities/math.log10(Data.number_of_cities)) * theta
     
     T = 0
@@ -333,11 +333,10 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
         print(T, best_sol, "\n", best_fitness)
         print(used, score, sum(used))
 
-        T += 1
-        # if best_fitness - prev_f < epsilon:
-        #     T = 0
-        # else: 
-        #     T += 1
+        if best_fitness - prev_f < epsilon:
+            T = 0
+        else: 
+            T += 1
         
     return best_sol, best_fitness, Result_print, solution_pack, Data1
     
