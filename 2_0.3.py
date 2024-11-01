@@ -472,7 +472,6 @@ for txt_file in txt_files:
             workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{theta}_CL2.xlsx")
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
-        log_file.close()
 
 workbook.close()
 
