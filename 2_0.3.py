@@ -37,8 +37,8 @@ BEST = []
 number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '50')) 
 delta = float(os.getenv('DELTA', '0.3'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
-theta = float(os.getenv('theta', '0.5'))
-
+theta = float(os.getenv('THETA', '0.5'))
+data_set = str(os.getenv('DATA_SET', 'C101_2.dat'))
 solution_pack_len = 0
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
@@ -410,10 +410,10 @@ folder_path = "test_data/data_demand_random/"+str(number_of_cities)
 # folder_path = "test_data\\Smith\\TSPrd(time)\\Solomon\\15"
 
 # Tìm các file với đuôi là 0.5.dat, 2.dat hoặc 3.dat
-txt_files = glob.glob(os.path.join(folder_path, "*0.5.dat")) + \
-            glob.glob(os.path.join(folder_path, "*2.dat")) + \
-            glob.glob(os.path.join(folder_path, "*3.dat"))
-
+# txt_files = glob.glob(os.path.join(folder_path, "*0.5.dat")) + \
+#             glob.glob(os.path.join(folder_path, "*2.dat")) + \
+#             glob.glob(os.path.join(folder_path, "*3.dat"))
+txt_files = glob.glob(os.path.join(folder_path, data_set))
 # txt_files = ["test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_1.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.5.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_2.dat", "test_data\\Smith\\TSPrd(time)\\Solomon\\15\\RC101_3.dat"]
 # Tạo một tệp Excel mới
 workbook = openpyxl.Workbook()
@@ -469,9 +469,8 @@ for txt_file in txt_files:
             if i == ITE - 1:
                 sheet.cell(row=row, column=column, value=avg_run_time)
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))
-            workbook.save(f"Random_{number_of_cities}_{delta}_{alpha}_{theta}_CL2.xlsx")
+            workbook.save(f"Random_{number_of_cities}_{data_set}_{delta}_{alpha}_{theta}_CL2.xlsx")
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
 
 workbook.close()
-
