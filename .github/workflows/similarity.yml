@@ -28,7 +28,7 @@ jobs:
         run: pip install -r requirements.txt
         
       - name: Run main.py ITE-2
-        run: python div.py
+        run: python test_similarity.py
         env:
             NUMBER_OF_CITIES: ${{ matrix.number_of_cities }}
             SIMILARITY: ${{ matrix.similarity }}  # Added correct matrix variable
@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.similarity }}-${{ matrix.solution_pack_len }}-${{ matrix.data_set }}  # Thêm iteration vào tên file
-          path: Random_*_div.xlsx
+          path: Random_*_withoutdiv.xlsx
 
   summary:
     name: Summary results
@@ -59,4 +59,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: excel-results-summary
-          path: Random_*_div.xlsx
+          path: Random_*_withoutdiv.xlsx
