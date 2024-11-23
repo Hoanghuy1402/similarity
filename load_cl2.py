@@ -79,6 +79,7 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
         best_fitness = float(file.readlines()[-1].split(',')[1].split('=')[1])
 
     while T < SEGMENT:
+        end_time = time.time()
         if end_time - start_time > TIME_LIMIT:
             file.write(str(best_sol)+','+str(best_fitness)+','+str(weight)+','+str(T)+'\n')
             break
