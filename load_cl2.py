@@ -40,7 +40,7 @@ alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 theta = float(os.getenv('THETA', '1'))
 data_set = str(os.getenv('DATA_SET', 'C101_2.dat'))
 solution_pack_len = 0
-TIME_LIMIT = 10
+TIME_LIMIT = 20000
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [score / total_fitness for score in fitness_scores]
