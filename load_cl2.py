@@ -34,7 +34,7 @@ LOOP_IMPROVED = 0
 SET_LAST_10 = [] 
 BEST = []
 # 
-number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '50')) 
+number_of_cities = int(os.getenv('NUMBER_OF_CITIES', '10')) 
 delta = float(os.getenv('DELTA', '0.6'))
 alpha = json.loads(os.getenv('ALPHA', '[0.5, 0.3, 0.1]'))
 theta = float(os.getenv('THETA', '1'))
@@ -71,12 +71,19 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
     SEGMENT = 10
     END_SEGMENT =  int(Data.number_of_cities/math.log10(Data.number_of_cities)) * theta
     
+    with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(delta)+'_'+str(alpha)+'_'+str(theta)+'_CL2.json', 'r') as file:
+        lines = file.readlines()
+        last_line = lines[-1]
+        data = json.loads(last_line)  # Parse the last line as JSON
+
+        best_sol = data["best_sol"]
+        best_fitness = float(data["best_fitness"])
+        T = int(data["T"])
+        weight = data["weight"]
+
     nei_set = [0, 1, 2, 3]
-    with open('Random_'+str(number_of_cities)+'_'+str(data_set)+'_'+str(delta)+'_'+str(alpha)+'_'+str(theta)+'_CL2.txt', 'r') as file:
-        T = int(file.readlines()[-1].split(',')[1].split('=')[1])
-        weight = json.loads(file.readlines()[-1].split(',')[2].split('=')[1])
-        best_sol = json.loads(file.readlines()[-1].split(',')[0].split('=')[1])
-        best_fitness = float(file.readlines()[-1].split(',')[1].split('=')[1])
+    sol_chosen_to_break = best_sol
+    fit_of_sol_chosen_to_break = best_fitness
 
     while T < SEGMENT:
         end_time = time.time()
@@ -92,13 +99,14 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
         score = [0]*len(nei_set)
         used = [0]*len(nei_set)
         prev_f = best_fitness
-        prev_fitness = current_fitness
-        
+        current_sol = best_sol
+        current_fitness = best_fitness
         LOOP_IMPROVED = 0
         lennn = [0] * 6
         lenght_i = [0] * 6
         i = 0
         while i < END_SEGMENT:
+            prev_fitness = current_fitness
             current_neighborhood = []
             choose = roulette_wheel_selection(nei_set, weight)
             if choose == 0:

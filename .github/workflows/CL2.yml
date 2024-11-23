@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        number_of_cities: [10]
+        number_of_cities: [100]
         delta: [0.3, 0.6]
         alpha: ['[0.5, 0.3, 0.1]', '[0.3, 0.2, 0.1]']
         theta: [0.5, 1, 2]
@@ -39,8 +39,8 @@ jobs:
       - name: Upload result Excel file as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: txt-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.theta }}-${{ matrix.data_set }}  # Thêm iteration vào tên file
-          path: Random_*_CL2.txt
+          name: json-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.theta }}-${{ matrix.data_set }}  # Thêm iteration vào tên file
+          path: Random_*_CL2.json
 
   continue:
     name: Run test with multiple configurations
@@ -48,7 +48,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        number_of_cities: [10]
+        number_of_cities: [100]
         delta: [0.3, 0.6]
         alpha: ['[0.5, 0.3, 0.1]', '[0.3, 0.2, 0.1]']
         theta: [0.5, 1, 2]
@@ -60,8 +60,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          path: Random_*_CL2.txt
-          merge-multiple: true
+          name: json-results-${{ matrix.number_of_cities }}-${{ matrix.delta }}-${{ matrix.alpha }}-${{ matrix.theta }}-${{ matrix.data_set }} 
+          path: .
       
       - name: Setup Python
         uses: actions/setup-python@v5
