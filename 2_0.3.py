@@ -83,6 +83,7 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     current_sol = init_solution
     with open('Random_'+str(number_of_cities)+'_'+str(data_set)+'_'+str(delta)+'_'+str(alpha)+'_'+str(theta)+'_CL2.txt', 'a') as file:
         while T < SEGMENT:
+            end_time = time.time()
             if end_time - start_time > TIME_LIMIT:
                 file.write(str(best_sol)+','+str(best_fitness)+','+str(weight)+','+str(T)+'\n')
                 break
