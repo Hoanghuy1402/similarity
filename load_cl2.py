@@ -79,15 +79,15 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
         best_sol = data["best_sol"]
         best_fitness = float(data["best_fitness"])
         done = data["Done"]
+        runtime = data["runtime"]
 
     if done:
         data_to_write = {
             "Done": True,
             "best_sol": best_sol,
-            "best_fitness": best_fitness,
-            "runtime": data["runtime"]
+            "best_fitness": best_fitness
         }
-        return best_sol, best_fitness, Result_print, solution_pack, data_to_write
+        return best_sol, best_fitness, Result_print, solution_pack, data_to_write, runtime
 
     T = int(data["T"])
     weight = data["weight"]
@@ -102,7 +102,6 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
                 "best_fitness": best_fitness,
                 "T": T,
                 "weight": weight,
-                "runtime": end_time - start_time + data["runtime"],
                 "Done": False
             }
             break
@@ -363,16 +362,14 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
         else: 
             T += 1
     
-    end = time.time()
     if data_to_write == {}:
         data_to_write = {
             "Done": True,
             "best_sol": best_sol,
             "best_fitness": best_fitness,
-            "runtime": end - start_time
         }
 
-    return best_sol, best_fitness, Result_print, solution_pack, data_to_write
+    return best_sol, best_fitness, Result_print, solution_pack, data_to_write, runtime
     
 def Tabu_search_for_CVRP(CC):
     Data1 = []
@@ -388,11 +385,11 @@ def Tabu_search_for_CVRP(CC):
     # print(best_sol) 
     # print(best_fitness)
     # print(Function.Check_if_feasible(best_sol))
-    best_sol, best_fitness, result_print, solution_pack, data_to_write = Tabu_search(tabu_tenure=Data.number_of_cities-1, CC=CC, first_time=True, Data1=Data1, index_consider_elite_set=0, start_time=start_time)
+    best_sol, best_fitness, result_print, solution_pack, data_to_write, runtime = Tabu_search(tabu_tenure=Data.number_of_cities-1, CC=CC, first_time=True, Data1=Data1, index_consider_elite_set=0, start_time=start_time)
         # if end_time - start_time > 3000:
         #     break
 
-    return best_fitness, best_sol, data_to_write
+    return best_fitness, best_sol, data_to_write, runtime
 
 # Thư mục chứa các file .txt
 folder_path = "test_data/data_demand_random/"+str(number_of_cities)
@@ -439,7 +436,9 @@ for txt_file in txt_files:
             BEST = []
             # print("------------------------",i,"------------------------")
             start_time = time.time()
-            best_fitness, best_sol, data_to_write = Tabu_search_for_CVRP(1)
+            best_fitness, best_sol, data_to_write, runtime = Tabu_search_for_CVRP(1)
+            end_time = time.time()
+            data_to_write["runtime"] = runtime + end_time - start_time
             with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(delta)+'_'+str(alpha)+'_'+str(theta)+'_CL2.json', 'w') as file:  # Open a file in write mode
                 file.write(json.dumps(data_to_write) + "\n")
             print("---------- RESULT ----------")
