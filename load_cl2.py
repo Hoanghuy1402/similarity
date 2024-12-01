@@ -392,7 +392,7 @@ def Tabu_search_for_CVRP(CC):
         # if end_time - start_time > 3000:
         #     break
 
-    return best_fitness, best_sol
+    return best_fitness, best_sol, data_to_write
 
 # Thư mục chứa các file .txt
 folder_path = "test_data/data_demand_random/"+str(number_of_cities)
