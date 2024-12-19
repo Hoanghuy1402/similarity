@@ -208,7 +208,13 @@ jobs:
     name: Summary results
     needs: final
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        number_of_cities: [10, 20]
+        segment: [10]
+        iteration: [1]
+        data_set: ["C101_0.5.dat", "C101_2.dat", "C101_3.dat", "C201_0.5.dat", "C201_2.dat", "C201_3.dat", "R101_0.5.dat", "R101_2.dat", "R101_3.dat", "RC101_0.5.dat", "RC101_2.dat", "RC101_3.dat"]
+        
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -216,7 +222,8 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: excel-results-*
+          name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.data_set }}-${{ matrix.segment }}-iter-${{ matrix.iteration }}
+          path: .
           merge-multiple: true
       
       - name: Upload artifact
