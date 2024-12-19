@@ -107,7 +107,7 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
         
-      - name: Run main.py ITE-9
+      - name: Run main.py ITE-2
         run: python load_cl2.py
         env:
           NUMBER_OF_CITIES: ${{ matrix.number_of_cities }}
