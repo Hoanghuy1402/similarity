@@ -222,7 +222,6 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: excel-results-${{ matrix.number_of_cities }}-${{ matrix.data_set }}-${{ matrix.segment }}-iter-${{ matrix.iteration }}
           path: .
           merge-multiple: true
       
