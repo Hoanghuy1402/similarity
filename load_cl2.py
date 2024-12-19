@@ -42,6 +42,7 @@ data_set = str(os.getenv('DATA_SET'))
 solution_pack_len = 0
 TIME_LIMIT = 14000
 SEGMENT = int(os.getenv('SEGMENT'))
+ite = int(os.getenv('ITERATION'))
 def roulette_wheel_selection(population, fitness_scores):
     total_fitness = sum(fitness_scores)
     probabilities = [score / total_fitness for score in fitness_scores]
@@ -72,7 +73,7 @@ def Tabu_search(tabu_tenure, CC, first_time, Data1, index_consider_elite_set, st
 
     END_SEGMENT =  int(Data.number_of_cities/math.log10(Data.number_of_cities)) * theta
     data_to_write = {}
-    with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(SEGMENT)+'_CL2.json', 'r') as file:
+    with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(SEGMENT)+'_iter-'+str(ite)+'_CL2.json', 'r') as file:
         lines = file.readlines()
         last_line = lines[-1]
         data = json.loads(last_line)  # Parse the last line as JSON
@@ -449,7 +450,7 @@ for txt_file in txt_files:
             best_fitness, best_sol, data_to_write, runtime = Tabu_search_for_CVRP(1)
             end_time = time.time()
             data_to_write["runtime"] = runtime + end_time - start_time
-            with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(delta)+'_'+str(alpha)+'_'+str(theta)+'_CL2.json', 'w') as file:  # Open a file in write mode
+            with open('Random_'+str(data_set)+'_'+str(number_of_cities)+'_'+str(SEGMENT)+'_iter-'+str(ite)+'_CL2.json', 'w') as file:  # Open a file in write mode
                 file.write(json.dumps(data_to_write) + "\n")
             print("---------- RESULT ----------")
             print(best_sol)
