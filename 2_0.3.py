@@ -85,6 +85,7 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     weight = [1/len(nei_set)]*len(nei_set)
     current_sol = init_solution
     data_to_write = {}
+    Best_T = 0
     while T < SEGMENT:
         end_time = time.time()
         if end_time - start_time > TIME_LIMIT:
@@ -372,7 +373,7 @@ def Tabu_search_for_CVRP(CC):
     list_init = []
     
     start_time = time.time()
-    current_sol5 = Function.initial_solution3()
+    current_sol5 = Function.initial_solution7()
     list_init.append(current_sol5)
 
     
