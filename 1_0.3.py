@@ -463,13 +463,12 @@ for txt_file in txt_files:
             end_time = time.time()
             run = end_time - start_time
             run_time.append(run)
-            avg_run_time += run/ITE
             sheet.cell(row=row, column=column, value=best_fitness)
 
             column += 1
             best_csv_sol.append(best_sol)
             if i == ITE - 1:
-                sheet.cell(row=row, column=column, value=avg_run_time)
+                sheet.cell(row=row, column=column, value=str(run_time))
                 sheet.cell(row=row, column=column+1, value=str(best_csv_sol))    
         # Tăng dòng cho lần chạy tiếp theo
         row += 1
