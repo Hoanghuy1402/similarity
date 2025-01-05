@@ -26,7 +26,7 @@ global SET_LAST_10
 global BEST
 
 # Set up chỉ số -------------------------------------------------------------------
-ITE = 5
+ITE = 2
 epsilon = (-1) * 0.00001
 # 15:   120,    20:    150
 # BREAKLOOP = Data.number_of_cities * 8
