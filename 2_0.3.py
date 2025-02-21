@@ -35,9 +35,9 @@ SET_LAST_10 = []
 BEST = []
 # 
 number_of_cities = int(os.getenv('NUMBER_OF_CITIES')) 
-delta = 0.3
-alpha = [0.5, 0.3, 0.1]
-theta = 2
+delta = Data.delta
+alpha = Data.alpha
+theta = Data.theta
 data_set = str(os.getenv('DATA_SET'))
 solution_pack_len = 0
 TIME_LIMIT = 14000
@@ -85,7 +85,6 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
     weight = [1/len(nei_set)]*len(nei_set)
     current_sol = init_solution
     data_to_write = {}
-    Best_T = 0
     while T < SEGMENT:
         end_time = time.time()
         if end_time - start_time > TIME_LIMIT:
