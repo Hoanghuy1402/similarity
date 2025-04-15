@@ -356,11 +356,10 @@ def Tabu_search(init_solution, tabu_tenure, CC, first_time, Data1, index_conside
                     continue
                 else:
                     weight[j] = (1 - factor)*weight[j] + factor*score[j]/used[j]
-            # if flag == True:
-            #     i = 0
-            # else:
-            #     i += 1
-            i+=1
+            if flag == True:
+                i = 0
+            else:
+                i += 1
         print("-------",T,"--------")
         print(best_fitness)
         print(T, best_sol, "\n", best_fitness)
